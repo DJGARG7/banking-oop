@@ -1,7 +1,6 @@
 import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
-//hello
 public class User
 {
     private String name, password;
