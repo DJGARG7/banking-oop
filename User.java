@@ -67,7 +67,7 @@ public class User
         //Layout.clearScreen();
         //Layout.displayEstelle();
         System.out.println("\t\tLogin\t\t");
-        System.out.print("Enter your username: ");
+        System.out.print("Enter your userid: ");
         int userid = Integer.parseInt(scan.readLine());
         Scanner alag = new Scanner(System.in);
         System.out.print("Enter your password: ");
