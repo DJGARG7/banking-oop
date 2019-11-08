@@ -5,8 +5,8 @@ public class User
 {
     private String name, password;
     private int userid;
-    private long ph_no;
-    public final Scanner scan = new Scanner(System.in);
+    private int ph_no;
+    public final  BufferedReader scan = new BufferedReader(new InputStreamReader(System.in));
 
     String getName()
     {
@@ -32,29 +32,29 @@ public class User
     {
         this.userid = userid;
     }
-    long getPh_no()
+    int getPh_no()
     {
         return ph_no;
     }
-    void setPh_no(long ph_no)
+    void setPh_no(int ph_no)
     {
         this.ph_no = ph_no;
     }
     
     public boolean auth(int userid, String password) throws IOException
     {
-        File f = new File("./Accounts.txt");
-        FileInput in = new FileInput(f);//??
+        File f = new File("C:/Users/Rutvay/Desktop/codes/Accounts.txt");
+        Scanner in= new Scanner(f);
         String[] data;
         do
         {
-            if(!in.ready())//check for endoffile
+            if(!in.hasNextLine())//check for endoffile
                 break;
-            data = in.readline().trim().split("[#]");
+            data = in.nextLine().trim().split("[#]");
             setUserid(Integer.parseInt(data[0]));
             setPassword(data[1]);
             setName(data[2]);
-            setPh_no(Long.parseLong(data[3]));
+            setPh_no(Integer.parseInt(data[3]));
         }while(getUserid()!=userid || !getPassword().equals(password));
         in.close();
         if(getUserid()==userid && getPassword().equals(password))
@@ -68,9 +68,9 @@ public class User
         //Layout.displayEstelle();
         System.out.println("\t\tLogin\t\t");
         System.out.print("Enter your username: ");
-        int userid = scan.nextInt();
+        int userid = Integer.parseInt(scan.readLine());
         System.out.print("Enter your password: ");
-        String password = scan.nextLine();
+        String password = scan.readLine();
         if(auth(userid, password))
         {
             System.out.println("Login Successfull");
@@ -80,13 +80,13 @@ public class User
         {
             System.out.println("Login Failed!");
             System.out.print("Login Again?[y/n]");
-            char choice = scan.nextLine().charAt(0);
+            char choice = (char)scan.read();
             if(choice == 'y')
                 return login();
             else
             {
                 System.out.print("SignUp Instead?[y/n]");
-                choice = scan.nextLine().charAt(0);
+                choice = (char)scan.read();
                 if(choice == 'y')
                     return signUp();
                 else
@@ -100,14 +100,15 @@ public class User
 		//Layout.clearScreen();
         //Layout.displayEstelle();
         Random r = new Random();
-		File f = new File("./Accounts.txt");
-		FileInput in = new FileInput(f);
+        File f = new File("C:/Users/Rutvay/Desktop/codes/Accounts.txt");  
+        Scanner in= new Scanner(f);
 		String s = "";
 		char c;
-        while(in.ready())
+        while(in.hasNextLine())
         {
-            c = (char)in.read();
-            s = s.concat(String.valueOf(c));
+            s+=in.nextLine()+"\n";
+           // c = (char)in.read();
+            //s = s.concat(String.valueOf(c));
         }
 		in.close();		
         String[] str = s.trim().split("\n");
@@ -115,14 +116,14 @@ public class User
         int userid,error;
         System.out.println("\t\tSignUp\t\t");
         System.out.print("Enter your NAME: ");
-        setName(scan.nextLine());
+        setName(scan.readLine());
         do
         {
             System.out.print("Enter your PhoneNo: ");
             error = 0;
             try
             {
-                setPh_no(Long.parseLong(scan.nextLine()));
+                setPh_no(Integer.parseInt(scan.readLine()));
             }
             catch(NumberFormatException e)
             {
@@ -145,12 +146,24 @@ public class User
         }while(userid == 0);
         System.out.println("the generated userid is :"+userid);       
         System.out.print("Enter your Password: ");
-        setPassword(scan.nextLine());
+        setPassword(scan.readLine());
         FileWriter writer = new FileWriter(f);
-		writer.write(s + "\n");
-        writer.append(userid+"#"+getPassword()+"#"+getName()+"#"+getPh_no());
+		writer.write(s);
+        writer.append(userid+"#"+getPassword()+"#"+getName()+"#"+getPh_no()+"\n");
         writer.close();
         return true;
     }
-    void change(){}
+    boolean change()  
+    {
+        String pass=getPassword();
+        String oldpas="";
+        System.out.println("Enter your old password :");
+        oldpas=scan.readLine();
+        if(!oldpas.equals(pass)){
+        System.out.println("You have entered a wrong password");
+        return false;}
+        System.out.println("Enter the New pass");
+        setPassword(scan.readLine());
+        return true;
+    }
 }
