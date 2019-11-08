@@ -5,7 +5,7 @@ class prodr
     public static void main(String args[])throws IOException
     {
 		Scanner scan1 = new Scanner(System.in);
-		int chza;
+		int ch;
 		banking ob1 = new banking();
 		do
 		{    
@@ -14,10 +14,8 @@ class prodr
 	       	System.out.println("3: CHANGE PASSWORD");
     	   	System.out.println("4: EXIT");
        		System.out.println("enter your choice");
-			   chza = scan1.nextInt();
-			   //scan.close();  
-			   
-       		switch(chza)
+			ch = scan1.nextInt();			   
+       		switch(ch)
         	{
         		case 1:
         		ob1.signUp();
@@ -36,8 +34,6 @@ class prodr
         		default :
         		System.out.println("wrong choice ...enter again");
         	}
-        }while(chza != 4);
-
-        
+        }while(ch!= 4);     
     }
 }
