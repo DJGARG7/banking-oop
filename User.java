@@ -7,6 +7,8 @@ public class User
     private int userid;
     private int ph_no;
     public final  BufferedReader scan = new BufferedReader(new InputStreamReader(System.in));
+    File f = new File("C:/Users/Rutvay/Desktop/codes/Accounts.txt");
+    File f1 = new File("C:/Users/Rutvay/Desktop/codes/Balance.txt");
 
     String getName()
     {
@@ -43,7 +45,7 @@ public class User
     
     public boolean auth(int userid, String password) throws IOException
     {
-        File f = new File("C:/Users/Rutvay/Desktop/codes/Accounts.txt");
+       
         Scanner in= new Scanner(f);
         String[] data;
         do
@@ -101,7 +103,6 @@ public class User
 		//Layout.clearScreen();
         //Layout.displayEstelle();
         Random r = new Random();
-        File f = new File("C:/Users/Rutvay/Desktop/codes/Accounts.txt");  
         Scanner in= new Scanner(f);
 		String s = "";
         while(in.hasNextLine())
@@ -143,6 +144,16 @@ public class User
         FileWriter writer = new FileWriter(f);
 		writer.write(s);
         writer.append(userid+"#"+getPassword()+"#"+getName()+"#"+getPh_no()+"\n");
+        writer.close();
+        System.out.println("SIGNUP SUCCESSFUL");
+        Scanner ins= new Scanner(f1);
+		s = "";
+        while(ins.hasNextLine())
+            s+=in.nextLine()+"\n";
+        in.close();	
+        FileWriter writer = new FileWriter(f1);
+		writer.write(s);
+        writer.append(userid+"#"+0+"\n");
         writer.close();
         return false;
     }
