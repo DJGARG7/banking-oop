@@ -5,17 +5,25 @@ class prodr
     public static void main(String args[])throws IOException
     {
 		Scanner scan1 = new Scanner(System.in);
-		int ch;
+		int chza;
 		banking ob1 = new banking();
 		do
-		{    
-    	   	System.out.println("1: NEW USER REGISTRATION");
-     		System.out.println("2: LOGIN");
-	       	System.out.println("3: CHANGE PASSWORD");
-    	   	System.out.println("4: EXIT");
-       		System.out.println("enter your choice");
-			ch = scan1.nextInt();			   
-       		switch(ch)
+		{   
+		  /*System.out.println(" ██████╗ ███╗   ██╗██████╗       ");
+			System.out.println("██╔════╝ ████╗  ██║██╔══██╗▄ ██╗▄");
+			System.out.println("██║  ███╗██╔██╗ ██║██████╔╝ ████╗");
+			System.out.println("██║   ██║██║╚██╗██║██╔══██╗▀╚██╔▀");
+			System.out.println("╚██████╔╝██║ ╚████║██████╔╝  ╚═╝ ");
+			System.out.println(" ╚═════╝ ╚═╝  ╚═══╝╚═════╝        ");*/
+			System.out.println("_______________________GOLIATH NATIONAL BANK_____________________");
+    	   	System.out.println("		1: NEW USER REGISTRATION");
+     		System.out.println("		2: LOGIN");
+	       	System.out.println("		3: CHANGE PASSWORD");
+    	   	System.out.println("		4: EXIT");
+       		System.out.println("		enter your choice");
+			   chza = scan1.nextInt(); 
+			   
+       		switch(chza)
         	{
         		case 1:
         		ob1.signUp();
@@ -34,6 +42,8 @@ class prodr
         		default :
         		System.out.println("wrong choice ...enter again");
         	}
-        }while(ch!= 4);     
+        }while(chza != 4);
+
+        
     }
 }
