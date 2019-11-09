@@ -1,9 +1,11 @@
 import java.io.*;
+import java.util.Scanner;
 class Transaction
 {
 	int userid,bal,tr1;
-	BufferedReader scan = new BufferedReader(new InputStreamReader(System.in));
-	Transaction(int userid)
+    BufferedReader scan = new BufferedReader(new InputStreamReader(System.in));
+    File f = new File("C:/Users/Rutvay/Desktop/codes/Balance.txt");
+	Transaction(int userid)throws IOException
 	{
 		this.userid = userid;
 		bal = searchId(userid);
@@ -12,21 +14,40 @@ class Transaction
 	{
 		return bal;
 	}
-	int searchId(int userid)
+	int searchId(int userid)throws IOException
 	{
-		int bal = 0;
-		//if account found
-		//scanner file
-		return bal;
-		//else
-		//return -1;
+        String s="";
+        Scanner scan= new Scanner(f);
+        while(scan.hasNextLine())
+        {
+            s=scan.nextLine();  
+            if(s.startsWith(userid+"#"))
+            {
+                    return Integer.parseInt(s.split("[#]")[1]);
+            }
+        }
+        scan.close();
+        return -1; 
 	}
-	void updatefile(int userid,int bal)
+	void updatefile(int userid,int bal)throws IOException
 	{
-		//append at last userid and bal
-		//file writer
+        Scanner scan = new Scanner(f);
+        String s="";
+        String temp="";
+        while(scan.hasNextLine())
+        {
+            s= scan.nextLine();
+            if(s.startsWith(userid+"#"))
+            continue;
+            temp= temp+s+"\n";
+        }
+        scan.close();
+        FileWriter  f1= new FileWriter(f);
+        f1.write(temp);
+        f1.append(userid+"#"+bal+"\n");
+        f1.close(); 
 	}
-	void deposit()
+	void deposit()throws IOException
 	{
 		System.out.println("enter amount to be deposited(max 50000 ruppees at a time)");
 		tr1 = Integer.parseInt(scan.readLine());
@@ -38,7 +59,7 @@ class Transaction
 			System.out.println("TRANSACTION SUCCESSFUL");
 		}
 	}
-	void withdraw()
+	void withdraw()throws IOException
 	{
 		System.out.println("enter amount to be withdrawn(max 20000 ruppees at a time)");
 		tr1 = Integer.parseInt(scan.readLine());
@@ -52,7 +73,7 @@ class Transaction
 			System.out.println("TRANSACTION SUCCESSFUL");
 		}
 	}
-	void transfer()
+	void transfer()throws IOException
 	{
 		int bal=0;
 		System.out.println("ENTER USERID OF BENEFICIARY");
@@ -77,7 +98,7 @@ class Transaction
 		}
 	}
 }
-public class Banking extends User
+public class banking extends User
 {
 	void display(int bal)
 	{
@@ -86,8 +107,9 @@ public class Banking extends User
 		System.out.println("PHONE NUMBER: "+ getPh_no());
 		System.out.println("AVAILABLE BALANCE: "+ bal);
 	}
-	void mainmenu1()
+	void mainmenu1()throws IOException
 	{
+        int ch;
 		Transaction tr = new Transaction(getUserid());
 		do
 		{
@@ -98,7 +120,7 @@ public class Banking extends User
 		System.out.println("4.CHANGE YOUR PASSWORD");
 		System.out.println("5. DISPLAY DETAILS AND BALANCE");
 		System.out.println("6.Logout");
-		int ch = Integer.parseInt(scan.readLine());
+		ch = Integer.parseInt(scan.readLine());
 		switch(ch)
 		{
 			case 1:
@@ -111,7 +133,7 @@ public class Banking extends User
 			tr.transfer();
 			break;
 			case 4:
-			tr.change();
+			change();
 			break;
 			case 5:
 			display(tr.getBal());
