@@ -8,21 +8,10 @@ class prodr
         BufferedReader scan1 = new BufferedReader(new InputStreamReader(System.in));
 		int chza;
 		banking ob1 = new banking();
+		Show.clear();
 		do
 		{   
-		    
-		   // Show.clear();
-		   System.out.println("");
-		   System.out.println(" 	    /$$$$$$        /$$   /$$       /$$$$$$$            ");
-		   System.out.println("	   /$$__  $$      | $$$ | $$      | $$__  $$  /$$/$$ ");
-		   System.out.println("	  | $$  \\__/      | $$$$| $$      | $$  \\ $$ |  $$$/ ");
-		   System.out.println("	  | $$ /$$$$      | $$ $$ $$      | $$$$$$$  /$$$$$$$");
-		   System.out.println("	  | $$|_  $$      | $$  $$$$      | $$__  $$|__ $$$_/");
-		   System.out.println("	  | $$  \\ $$      | $$\\  $$$      | $$  \\ $$  /$$ $$ ");
-		   System.out.println("	  |  $$$$$$/      | $$ \\  $$      | $$$$$$$/ |__/__/ ");
-		   System.out.println("	   \\______/       |__/  \\__/      |_______/          ");
-			System.out.println("___________GOLIATH_________NATIONAL________BANK_____________");
-    	   	System.out.println("		1: NEW USER REGISTRATION");
+		   	System.out.println("		1: NEW USER REGISTRATION");
      		System.out.println("		2: LOGIN");
 	       	System.out.println("		3: CHANGE PASSWORD");
     	   	System.out.println("		4: EXIT");
