@@ -5,8 +5,8 @@ public class User
 {
     private String name, password;
     private int userid;
-    private int ph_no;
-    public final  BufferedReader scan = new BufferedReader(new InputStreamReader(System.in));
+    private long ph_no;
+    public final BufferedReader scan = new BufferedReader(new InputStreamReader(System.in));
     File f = new File("D:/java codes/1project/Accounts.txt");
     File f1 = new File("D:/java codes/1project/Balance.txt");
 
@@ -34,11 +34,11 @@ public class User
     {
         this.userid = userid;
     }
-    int getPh_no()
+    long getPh_no()
     {
         return ph_no;
     }
-    void setPh_no(int ph_no)
+    void setPh_no(long ph_no)
     {
         this.ph_no = ph_no;
     }
@@ -50,13 +50,13 @@ public class User
         String[] data;
         do
         {
-            if(!in.hasNextLine())//check for endoffile
+            if(!in.hasNextLine())
                 break;
             data = in.nextLine().trim().split("[#]");
             setUserid(Integer.parseInt(data[0]));
             setPassword(data[1]);
             setName(data[2]);
-            setPh_no(Integer.parseInt(data[3]));
+            setPh_no(Long.parseLong(data[3]));
         }while(getUserid()!=userid || !getPassword().equals(password));
         in.close();
         if(getUserid()==userid && getPassword().equals(password))
@@ -67,19 +67,35 @@ public class User
     public boolean login() throws IOException
     {
         Show.clear();
+        int error=0,userid=0;
         System.out.println("\t\tLogin\t\t");
-        System.out.print("Enter your userid: ");
-        int userid = Integer.parseInt(scan.readLine());
+        do
+        {
+            System.out.print("Enter your userid: ");
+            error = 0;
+            try
+            {
+                userid = Integer.parseInt(scan.readLine());
+            }
+            catch(NumberFormatException e)
+            {
+                error = 1;
+                System.out.println("invalid userid");
+            }
+        }while(error == 1);
+        
         Scanner alag = new Scanner(System.in);
         System.out.print("Enter your password: ");
         String password = scan.readLine();
         if(auth(userid, password))
         {
+            Show.clear();
             System.out.println("Login Successfull");
             return true;
         }
         else
         {
+            Show.clear();
             System.out.println("Login Failed!");
             System.out.print("Login Again?[y/n]");
             char choice = alag.nextLine().charAt(0);
@@ -87,12 +103,16 @@ public class User
                 return login();
             else
             {
+                Show.clear();
                 System.out.print("SignUp Instead?[y/n]");
                 choice = alag.nextLine().charAt(0);
                 if(choice == 'y')
                     return signUp();
                 else
+                {
+                    Show.clear();
                     return false;
+                }
             }
         }
     }
@@ -118,13 +138,18 @@ public class User
             error = 0;
             try
             {
-                setPh_no(Integer.parseInt(scan.readLine()));
+                setPh_no(Long.parseLong(scan.readLine()));
             }
             catch(NumberFormatException e)
             {
+                System.out.println("invalid number");
                 error = 1;
             }
-            //check for 10 digits
+            if(!(getPh_no()>=1000000000L && getPh_no()<=9999999999L))
+            {
+                System.out.println("invalid number");
+                error = 1;
+            }
         }while(error == 1);
         do
         {
@@ -159,13 +184,14 @@ public class User
     }
     boolean change()throws IOException
     {
-        File f = new File("C:/Users/Rutvay/Desktop/codes/Accounts.txt");
         String oldpas="";
+        Show.clear();
         System.out.println("Enter your old password :");
         oldpas=scan.readLine();
         if(!oldpas.equals(getPassword()))
         {
-            System.out.println("You have entered a wrong password");
+            Show.clear();
+            System.out.println("You have entered a wrong password.....task failed!!");
             return false;
         }
         System.out.println("Enter New password");
@@ -173,7 +199,7 @@ public class User
         Scanner s= new Scanner(f);
         String ch2="";
         String temp="";      
-       while(s.hasNextLine())
+        while(s.hasNextLine())
         {
             temp = s.nextLine();
             if(temp.startsWith(getUserid()+"#"))
@@ -185,6 +211,8 @@ public class User
         name.write(ch2);
         name.append(userid+"#"+getPassword()+"#"+getName()+"#"+getPh_no()+"\n");
         name.close();
+        Show.clear();
+        System.out.println("PASSWORD CHANGED SUCCESSFULLY");
         return true;
     }
 }
