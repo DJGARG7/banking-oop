@@ -1,27 +1,33 @@
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 class prodr
 {
     public static void main(String args[])throws IOException
     {
-		Scanner scan1 = new Scanner(System.in);
+        //Scanner scan1 = new Scanner(System.in);
+        BufferedReader scan1 = new BufferedReader(new InputStreamReader(System.in));
 		int chza;
 		banking ob1 = new banking();
 		do
 		{   
-		  /*System.out.println(" ██████╗ ███╗   ██╗██████╗       ");
-			System.out.println("██╔════╝ ████╗  ██║██╔══██╗▄ ██╗▄");
-			System.out.println("██║  ███╗██╔██╗ ██║██████╔╝ ████╗");
-			System.out.println("██║   ██║██║╚██╗██║██╔══██╗▀╚██╔▀");
-			System.out.println("╚██████╔╝██║ ╚████║██████╔╝  ╚═╝ ");
-			System.out.println(" ╚═════╝ ╚═╝  ╚═══╝╚═════╝        ");*/
-			System.out.println("_______________________GOLIATH NATIONAL BANK_____________________");
+		    
+		   // Show.clear();
+		   System.out.println("");
+		   System.out.println(" 	    /$$$$$$        /$$   /$$       /$$$$$$$            ");
+		   System.out.println("	   /$$__  $$      | $$$ | $$      | $$__  $$  /$$/$$ ");
+		   System.out.println("	  | $$  \\__/      | $$$$| $$      | $$  \\ $$ |  $$$/ ");
+		   System.out.println("	  | $$ /$$$$      | $$ $$ $$      | $$$$$$$  /$$$$$$$");
+		   System.out.println("	  | $$|_  $$      | $$  $$$$      | $$__  $$|__ $$$_/");
+		   System.out.println("	  | $$  \\ $$      | $$\\  $$$      | $$  \\ $$  /$$ $$ ");
+		   System.out.println("	  |  $$$$$$/      | $$ \\  $$      | $$$$$$$/ |__/__/ ");
+		   System.out.println("	   \\______/       |__/  \\__/      |_______/          ");
+			System.out.println("___________GOLIATH_________NATIONAL________BANK_____________");
     	   	System.out.println("		1: NEW USER REGISTRATION");
      		System.out.println("		2: LOGIN");
 	       	System.out.println("		3: CHANGE PASSWORD");
     	   	System.out.println("		4: EXIT");
        		System.out.println("		enter your choice");
-			   chza = scan1.nextInt(); 
+			   chza = Integer.parseInt(scan1.readLine()); 
 			   
        		switch(chza)
         	{
@@ -42,8 +48,7 @@ class prodr
         		default :
         		System.out.println("wrong choice ...enter again");
         	}
-        }while(chza != 4);
-
-        
+        }while(chza != 4);      
     }
 }
+		 
