@@ -7,8 +7,8 @@ public class User
     private int userid;
     private int ph_no;
     public final  BufferedReader scan = new BufferedReader(new InputStreamReader(System.in));
-    File f = new File("C:/Users/Rutvay/Desktop/codes/Accounts.txt");
-    File f1 = new File("C:/Users/Rutvay/Desktop/codes/Balance.txt");
+    File f = new File("D:/java codes/1project/Accounts.txt");
+    File f1 = new File("D:/java codes/1project/Balance.txt");
 
     String getName()
     {
@@ -66,8 +66,7 @@ public class User
 
     public boolean login() throws IOException
     {
-        //Layout.clearScreen();
-        //Layout.displayEstelle();
+        Show.clear();
         System.out.println("\t\tLogin\t\t");
         System.out.print("Enter your userid: ");
         int userid = Integer.parseInt(scan.readLine());
@@ -100,8 +99,8 @@ public class User
 
     public boolean signUp() throws IOException
     {
-		//Layout.clearScreen();
-        //Layout.displayEstelle();
+		
+        Show.clear();
         Random r = new Random();
         Scanner in= new Scanner(f);
 		String s = "";
@@ -145,16 +144,17 @@ public class User
 		writer.write(s);
         writer.append(userid+"#"+getPassword()+"#"+getName()+"#"+getPh_no()+"\n");
         writer.close();
+        Show.clear();
         System.out.println("SIGNUP SUCCESSFUL");
         Scanner ins= new Scanner(f1);
 		s = "";
         while(ins.hasNextLine())
-            s+=in.nextLine()+"\n";
-        in.close();	
-        FileWriter writer = new FileWriter(f1);
-		writer.write(s);
-        writer.append(userid+"#"+0+"\n");
-        writer.close();
+            s+=ins.nextLine()+"\n";
+        ins.close();	
+        FileWriter writer1 = new FileWriter(f1);
+		writer1.write(s);
+        writer1.append(userid+"#"+0+"\n");
+        writer1.close();
         return false;
     }
     boolean change()throws IOException
