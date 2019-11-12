@@ -1,5 +1,5 @@
 import java.io.*;
-import java.util.Scanner;
+import java.util.*;
 class Transaction
 // bade hi mehnat 
 {
@@ -11,6 +11,7 @@ class Transaction
 		this.userid = userid;
 		bal = searchId(userid);
 	}
+	//rutvay chutiyas
 	int getBal()
 	{
 		return bal;
