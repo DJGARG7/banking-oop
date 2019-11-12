@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.Scanner;
 class Transaction
+// bade hi mehnat 
 {
 	int userid,bal,tr1;
     BufferedReader scan = new BufferedReader(new InputStreamReader(System.in));
