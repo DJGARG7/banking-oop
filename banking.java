@@ -1,7 +1,6 @@
 import java.io.*;
 import java.util.*;
 class Transaction
-// bade hi mehnat 
 {
 	int userid,bal,tr1;
     BufferedReader scan = new BufferedReader(new InputStreamReader(System.in));
@@ -11,7 +10,6 @@ class Transaction
 		this.userid = userid;
 		bal = searchId(userid);
 	}
-	//rutvay chutiyas
 	int getBal()
 	{
 		return bal;
